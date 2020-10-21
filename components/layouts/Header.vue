@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white py-6">
+  <header class="bg-white pt-6 pb-3">
     <div class="container mx-auto flex justify-between px-4 md:px-0">
       <Back></Back>
       <Logo></Logo>

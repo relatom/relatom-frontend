@@ -24,8 +24,16 @@ export default {
   //components: true,
 
   components: [
-    '~/components/layouts/',
-    '~/components/ui/'
+    {
+      path: '~/components/layouts/'
+    },
+    {
+      path: '~/components/ui/'
+    },
+    {
+      path: '~/components/ui/form',
+      prefix: 'Form'
+    }
   ],
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)

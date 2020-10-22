@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Notifications</h1>
+		<sub-header title="Notifications" />
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Paramètres</h1>
+		<sub-header title="Paramètres" />
 	</div>
 </template>
 

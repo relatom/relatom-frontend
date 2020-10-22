@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white border-b">
     <div class="container mx-auto pb-4 px-4">
-      <h1 class="font-bold text-2xl mb-2">{{ title }}</h1>
-      <div class="flex" v-if="hasActionsSlot">
+      <h1 class="font-bold text-2xl">{{ title }}</h1>
+      <div class="flex mt-2" v-if="hasActionsSlot">
         <slot name="actions"></slot>
       </div>
     </div>

@@ -3,18 +3,25 @@
 	  	<sub-header title="Nouvel évènement">
 	  	</sub-header>	
 	  	<div class="container mt-6 px-4">
+	  		
 	  		<form>
+	  			<t-input-group
+	  				label="Password"
+  					feedback="Password must be at least 6 characters long">
+	  				<t-input type="text" v-model="title" placeholder="Ajouter un titre"/>
+	  			</t-input-group>
+
 	  			<form-group label="Titre de l'évènement">
 	  				<form-input type="text" placeholder="Ajouter un titre" v-model="title"/>
 	  			</form-group>
 	  			<form-group>
-	  				<form-input-checkbox v-model="is_all_day">Toute la journée ?</form-input-checkbox>
+	  				<form-checkbox v-model="is_all_day">Toute la journée ?</form-checkbox>
 	  			</form-group>
 	  			<form-legend label="Débute">
-	  				<form-input-datetime v-model="starts_at" />
+	  				<form-datetime v-model="starts_at" />
 	  			</form-legend>
 	  			<form-legend label="Prend fin">
-	  				<form-input-datetime v-model="ends_at" />
+	  				<form-datetime v-model="ends_at" />
 	  			</form-legend>
 	  			<form-group label="Organisateur">
 	  				<form-input type="text" />
@@ -25,7 +32,7 @@
 	  			<form-group label="Notes (facultatif)">
 	  				<textarea class="block w-full " />
 	  			</form-group>
-	  			<button class="fixed bottom-0 left-0 right-0 mb-20 w-full bg-indigo-600 py-3 text-white">Enregistrer</button>
+	  			<t-button variant="full">Enregistrer</t-button>
 	  		</form>
 	  	</div>
   	</main>
@@ -38,7 +45,7 @@ export default {
   transition: 'slide-left',
   data () {
     return {
-    	'title' : null,
+    	'title' : 'test',
     	'is_all_day': false,
     	'starts_at': new Date(),
     	'ends_at': new Date(),

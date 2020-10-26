@@ -8,9 +8,9 @@
   			</btn-link>
   		</template>
   	</sub-header>	
-  	<div class="container mt-6 px-4">
+  	<container>
       <events-day v-for="(items, day) in events" :day="day" :items="items" :key="'day-' + day"></events-day>
-  	</div>
+  	</container>
   </main>
 </template>
 

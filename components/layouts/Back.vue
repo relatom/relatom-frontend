@@ -16,11 +16,13 @@ export default {
   computed : {
     isBack : function() {
       console.log(this.$route.name);
-      return this.$route.name == 'events-add';
+      return this.$route.name == 'events-add'
+        || this.$route.name == 'events-hashid';
     },
     backLabel : function() {
       switch (this.$route.name) {
         case 'events-add':
+        case 'events-hashid':
           return 'Évènements';
         break;
       }
@@ -30,6 +32,7 @@ export default {
   	goBack : function() {
   		switch (this.$route.name) {
         case 'events-add':
+        case 'events-hashid':
           this.$router.push({
             path: '/events'
           });

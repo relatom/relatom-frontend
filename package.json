@@ -9,8 +9,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxt/http": "^0.6.0",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
+    "vue-luxon": "^0.7.4",
     "vue-tailwind": "^1.3.0"
   },
   "devDependencies": {

@@ -18,7 +18,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/vue-tailwind'
+    '~/plugins/vue-tailwind',
+    '~/plugins/vue-luxon'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -34,6 +35,10 @@ export default {
     {
       path: '~/components/ui/form',
       prefix: 'Form'
+    },
+    {
+      path: '~/components/events',
+      prefix: 'events'
     }
   ],
 
@@ -41,6 +46,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxt/http'
   ],
   
   // Modules (https://go.nuxtjs.dev/config-modules)

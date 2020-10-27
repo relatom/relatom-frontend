@@ -1,56 +1,75 @@
 <template>
 	<main>
-	  	<sub-header title="Nouvel évènement">
-	  	</sub-header>	
-	  	<div class="container mt-6 px-4">
-	  		
-	  		<form>
+	  	<sub-header title="Nouvel évènement" />	
+	  	<container>
+	  		<form
+	  			@submit="checkForm"
+	  			method="post">
 	  			<t-input-group
-	  				label="Password"
-  					feedback="Password must be at least 6 characters long">
+	  				label="Titre de l'évènement">
 	  				<t-input type="text" v-model="title" placeholder="Ajouter un titre"/>
 	  			</t-input-group>
 
-	  			<form-group label="Titre de l'évènement">
-	  				<form-input type="text" placeholder="Ajouter un titre" v-model="title"/>
-	  			</form-group>
-	  			<form-group>
-	  				<form-checkbox v-model="is_all_day">Toute la journée ?</form-checkbox>
-	  			</form-group>
-	  			<form-legend label="Débute">
-	  				<form-datetime v-model="starts_at" />
-	  			</form-legend>
-	  			<form-legend label="Prend fin">
-	  				<form-datetime v-model="ends_at" />
-	  			</form-legend>
-	  			<form-group label="Organisateur">
-	  				<form-input type="text" />
-	  			</form-group>
-	  			<form-group label="Avec (facultatif)">
-	  				<form-input type="text" />
-	  			</form-group>
-	  			<form-group label="Notes (facultatif)">
-	  				<textarea class="block w-full " />
-	  			</form-group>
-	  			<t-button variant="full">Enregistrer</t-button>
+	  			<t-input-group>
+	  				<t-checkbox wrapped label="Toute la journée ?" v-model="is_all_day" />
+	  			</t-input-group label="Débute">
+
+	  			<t-input-group label="Débute">
+		  			<t-input type="date" v-model="starts_at_date" />
+		  			<t-input type="time" v-model="starts_at_time" v-if="!is_all_day" />
+	  			</t-input-group>
+
+	  			<t-input-group label="Prend fin">
+		  			<t-input type="date" v-model="ends_at_date" />
+		  			<t-input type="time" v-model="ends_at_time" v-if="!is_all_day" />
+	  			</t-input-group>
+
+	  			<t-input-group label="Notes (facultatif)">
+	  				<t-textarea v-model="notes" placeholder="Remarque sur l'organisation..." />
+	  			</t-input-group>
+
+	  			<t-button type="submit" variant="full">Enregistrer</t-button>
 	  		</form>
-	  	</div>
+	  	</container>
   	</main>
 </template>
 
 <script>
-export default {
 
-  name: 'add',
-  transition: 'slide-left',
-  data () {
-    return {
-    	'title' : 'test',
-    	'is_all_day': false,
-    	'starts_at': new Date(),
-    	'ends_at': new Date(),
-    	'notes' : null
-    }
-  }
+import { DateTime } from 'luxon';
+
+export default {
+  	name: 'add',
+	data () {
+		const currentDateTime =  DateTime.local();
+		return {
+			'title' : null,
+			'is_all_day': false,
+			'starts_at_date':  currentDateTime.toISODate(),
+			'starts_at_time': currentDateTime.toFormat('T'),
+			'ends_at_date': currentDateTime.toISODate(),
+			'ends_at_time': currentDateTime.plus({hours: 1}).toFormat('T'),
+			'notes' : null
+		}
+	},
+	methods: {
+		checkForm: function(e) {
+			console.log(this.title);
+			this.sendData();
+			e.preventDefault();
+		},
+		async sendData() {
+			const res = await this.$http.post('http://api.ckcfeins.relatom.test/events', 
+				{ 
+					title: this.title,
+					is_all_day: this.is_all_day,
+					starts_at: this.starts_at_date + ' ' + this.starts_at_time, 
+					ends_at: this.ends_at_date + ' ' + this.ends_at_time, 
+					notes: this.notes
+				}
+			);
+		}
+	}
+
 }
 </script>

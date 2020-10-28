@@ -5,7 +5,6 @@
 				<span v-html="icon" class="w-5 h-5 mb-1 mx-auto md:mb-0"></span>
             	<span class="text-xs my-auto md:ml-1">{{ name }}</span>
 			</div>
-			
 		</tailwind-link>	
 	</li>
 </template>

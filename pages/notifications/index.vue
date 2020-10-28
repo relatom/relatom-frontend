@@ -1,21 +1,11 @@
 <template>
 	<div>
-		<sub-header title="Notifications" />
+		<sub-header :title="$t('notifications.title')" />
 	</div>
 </template>
 
 <script>
 export default {
-
   name: 'index',
-
-  data () {
-    return {
-
-    }
-  }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

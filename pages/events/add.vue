@@ -1,34 +1,52 @@
 <template>
 	<main>
-	  	<sub-header title="Nouvel évènement" />	
+	  	<sub-header :title="$t('events.title.add')" />	
 	  	<container>
 	  		<form
 	  			@submit="checkForm"
 	  			method="post">
 	  			<t-input-group
-	  				label="Titre de l'évènement">
-	  				<t-input type="text" v-model="title" placeholder="Ajouter un titre"/>
+	  				:label="$t('events.label.title')" >
+	  				<t-input 
+	  				type="text" 
+	  				v-model="title" 
+	  				:placeholder="$t('events.placeholder.title')" />
 	  			</t-input-group>
-
 	  			<t-input-group>
-	  				<t-checkbox wrapped label="Toute la journée ?" v-model="is_all_day" />
-	  			</t-input-group label="Débute">
-
-	  			<t-input-group label="Débute">
-		  			<t-input type="date" v-model="starts_at_date" />
-		  			<t-input type="time" v-model="starts_at_time" v-if="!is_all_day" />
+	  				<t-checkbox 
+	  				wrapped 
+	  				:label="$t('events.label.is_all_day')" 
+	  				v-model="is_all_day" />
 	  			</t-input-group>
-
-	  			<t-input-group label="Prend fin">
-		  			<t-input type="date" v-model="ends_at_date" />
-		  			<t-input type="time" v-model="ends_at_time" v-if="!is_all_day" />
+	  			<t-input-group 
+	  				:label="$t('events.label.starts_at')">
+		  			<t-input 
+		  				type="date" 
+		  				v-model="starts_at_date" />
+		  			<t-input 
+		  				type="time" 
+		  				v-model="starts_at_time" 
+		  				v-if="!is_all_day" />
 	  			</t-input-group>
-
-	  			<t-input-group label="Notes (facultatif)">
-	  				<t-textarea v-model="notes" placeholder="Remarque sur l'organisation..." />
+	  			<t-input-group 
+	  				:label="$t('events.label.ends_at')">
+		  			<t-input 
+		  				type="date" 
+		  				v-model="ends_at_date" />
+		  			<t-input 
+		  				type="time" 
+		  				v-model="ends_at_time" 
+		  				v-if="!is_all_day" />
 	  			</t-input-group>
-
-	  			<t-button type="submit" variant="full">Enregistrer</t-button>
+	  			<t-input-group 
+	  				:label="$t('events.label.notes')" >
+	  				<t-textarea 
+	  					v-model="notes" 
+	  					:placeholder="$t('events.placeholder.notes')" />
+	  			</t-input-group>
+	  			<t-button 
+	  				type="submit" 
+	  				variant="full">{{ $t('events.submit.add') }}</t-button>
 	  		</form>
 	  	</container>
   	</main>

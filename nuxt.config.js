@@ -56,9 +56,28 @@ export default {
   
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    'nuxt-i18n'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  i18n: {
+    locales: [
+      {
+        name: 'Français',
+        code: 'fr',
+        file: 'fr.js'
+      },
+      {
+        name: 'Enflish',
+        code: 'en',
+        file: 'en.js'
+      },
+    ],
+    lazy: true,
+    langDir: 'assets/lang/',
+    defaultLocale: 'en',
   }
 }

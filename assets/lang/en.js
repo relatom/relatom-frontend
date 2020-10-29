@@ -31,7 +31,7 @@ export default {
 			"notes" : "Remark on this shedule..."
 		},
 		"submit" : {
-			"add" : "Enregistrer"
+			"add" : "Save"
 		}
 	}
 }

@@ -78,6 +78,6 @@ export default {
     ],
     lazy: true,
     langDir: 'assets/lang/',
-    defaultLocale: 'en',
+    defaultLocale: 'fr',
   }
 }

@@ -49,7 +49,11 @@ export default {
     {
       path: '~/components/events',
       prefix: 'events'
-    }
+    },
+    {
+      path: '~/components/icons',
+      prefix: 'icons'
+    },
   ],
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)

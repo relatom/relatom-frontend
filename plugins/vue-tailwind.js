@@ -6,7 +6,7 @@ const settings = {
     classes: 'border rounded-2xl py-2 px-3 text-gray-800',
   },
   TTextarea: {
-    classes: 'border rounded-2xl py-2 px-3 text-gray-900'
+    classes: 'form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5'
   },
   TCheckbox: {
     wrapped: true,
@@ -14,10 +14,10 @@ const settings = {
   TInputGroup: {
     classes: {
       wrapper: 'mb-4',
-      label: 'mb-1 block',
+      label: 'block text-sm leading-5 font-medium text-gray-700',
       body: 'flex flex-wrap',
-      feedback: 'text-gray-500',
-      description: 'text-gray-500'
+      feedback: 'mt-2 text-sm text-red-500',
+      description: 'mt-2 text-sm text-gray-500'
     },
   },
 	TButton: {

@@ -1,0 +1,58 @@
+<template>
+	<ValidationProvider
+          :vid="vid" 
+          :name="$attrs.name" 
+          :rules="rules" 
+          v-slot="{ valid, errors }">
+        <t-input-group 
+        	:label="$attrs.label"
+        	:description="$attrs.description"
+        	:feedback="errors[0]">
+			<t-textarea 
+				v-model="innerValue"
+				:placeholder="$attrs.placeholder" />
+		</t-input-group>
+    </ValidationProvider>
+</template>
+
+<script>
+import { ValidationProvider } from "vee-validate";
+
+export default {
+  name: 'TextareaWithValidation',
+  components : { 
+  	ValidationProvider 
+  },
+  props: {
+    vid: {
+      type: String
+    },
+    rules: {
+      type: [Object, String],
+      default: ""
+    },
+    // must be included in props
+    value: {
+      type: null
+    }
+  },
+  data: () => ({
+    innerValue: ""
+  }),
+  watch: {
+    // Handles internal model changes.
+    innerValue(newVal) {
+      this.$emit("input", newVal);
+    },
+    // Handles external model changes.
+    value(newVal) {
+      this.innerValue = newVal;
+    }
+  },
+  created() {
+    if (this.value) {
+      this.innerValue = this.value;
+    }
+  }
+}
+</script>

@@ -80,7 +80,7 @@ export default {
   		}
   	},
     async asyncData({ params, $http }) {
-	    const res = await $http.$get('http://api.ckcfeins.relatom.test/events/' + params.hashid)
+	    const res = await $http.$get('http://localhost/events/' + params.hashid)
 	    const event = await res.data
 	    return { event }
 	 }

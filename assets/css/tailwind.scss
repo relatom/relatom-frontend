@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+
+.field {
+	@apply flex-1 block w-full border border-gray-400 text-gray-900 rounded-2xl py-2 px-3 bg-white;
+
+	&:focus {
+		@apply outline-none border-gray-700;
+	}	
+}
+
+@tailwind utilities;
+

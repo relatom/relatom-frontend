@@ -22,7 +22,7 @@ import BtnLink from "~/components/ui/BtnLink"
 export default {
 	components: { SubHeader, BtnLink },
   async asyncData({ params, $http }) {
-    const events = await $http.$get(`http://api.ckcfeins.relatom.test/events`)
+    const events = await $http.$get(`http://localhost/events`)
     return { events }
   }
 }

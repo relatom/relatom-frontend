@@ -18,8 +18,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -39,8 +38,8 @@ export default {
       path: '~/components/ui/'
     },
     {
-      path: '~/components/ui/t',
-      prefix: 'T'
+      path: '~/components/ui/tu',
+      prefix: 'TU'
     },
     {
       path: '~/components/ui/form',
@@ -67,6 +66,13 @@ export default {
   modules: [
     'nuxt-i18n'
   ],
+
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.scss',
+    configPath: 'tailwind.config.js',
+    exposeConfig: false,
+    config: {}
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

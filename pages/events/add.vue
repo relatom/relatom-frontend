@@ -2,93 +2,74 @@
 	<main>
 	  	<sub-header :title="$t('events.title.add')" />	
 	  	<container>
-	  		<ValidationObserver v-slot="{ invalid }">
-		  		<form
-		  			@submit="checkForm"
-		  			method="post">
-		  			<t-input-with-validation 
-		  				rules="required"
-		  				type="string"
-		  				:label="$t('events.label.title')"
-		  				:placeholder="$t('events.placeholder.title')"
-		  				name="title"
-		  				v-model="title"
-		  				description="We'll never share your email with anyone else"
-		  			/>
-		  			<t-input-group>
-		  				<t-checkbox 
-		  				wrapped 
-		  				:label="$t('events.label.is_all_day')" 
-		  				v-model="is_all_day" />
-		  			</t-input-group>
-		  			<t-input-group 
-		  				:label="$t('events.label.starts_at')">
-			  			<t-input 
-			  				type="date" 
-			  				v-model="starts_at_date" />
-			  			<t-input 
-			  				type="time" 
-			  				v-model="starts_at_time" 
-			  				v-if="!is_all_day" />
-		  			</t-input-group>
-		  			<t-input-group 
-		  				:label="$t('events.label.ends_at')">
-			  			<t-input 
-			  				type="date" 
-			  				v-model="ends_at_date" />
-			  			<t-input 
-			  				type="time" 
-			  				v-model="ends_at_time" 
-			  				v-if="!is_all_day" />
-		  			</t-input-group>
-		  			<t-input-group 
-		  				:label="$t('events.label.notes')" >
-		  				<t-textarea 
-		  					v-model="notes" 
-		  					:placeholder="$t('events.placeholder.notes')" />
-		  			</t-input-group>
-		  			<t-button 
-		  				type="submit" 
-		  				variant="full">{{ $t('events.submit.add') }}</t-button>
-		  		</form>
-	  		</ValidationObserver>
+	  		<tu-form-with-validation v-on:onSubmit="onSubmit">
+	  			<tu-input-with-validation 
+	  				type="string"
+	  				:label="$t('events.label.title')"
+	  				:placeholder="$t('events.placeholder.title')"
+	  				name="title"
+	  				v-model="title" />
+	  			<tu-checkbox-with-validation 
+	  				:label="$t('events.label.is_all_day')" 
+	  				v-model="is_all_day" />
+	  			<tu-date-time-with-validation
+	  				rules="required"
+	  				:label="$t('events.label.starts_at')"
+	  				v-model="starts_at"
+	  				:is-time="!is_all_day" />
+	  			<tu-date-time-with-validation
+	  				rules="required"
+	  				:label="$t('events.label.ends_at')"
+	  				v-model="ends_at"
+
+	  				:is-time="!is_all_day" />
+	  			<tu-textarea-with-validation 
+	  				:label="$t('events.label.notes')"
+	  				v-model="notes" 
+	  				:placeholder="$t('events.placeholder.notes')" />
+	  			<t-button 
+	  				type="submit" 
+	  				variant="full">{{ $t('events.submit.add') }}</t-button>
+	  			
+	  		</tu-form-with-validation>
 	  	</container>
+	  	<t-button v-on:click="onClick">Test</t-button>
   	</main>
+
 </template>
 
 <script>
 
 import { DateTime } from 'luxon';
-import { ValidationObserver } from "vee-validate";
 
 export default {
   	name: 'add',
-  	components : { ValidationObserver },
-	data () {
-		const currentDateTime =  DateTime.local();
+  	data () {
+  		const currentDateTime = DateTime.local();
 		return {
 			'title' : null,
 			'is_all_day': false,
-			'starts_at_date':  currentDateTime.toISODate(),
-			'starts_at_time': currentDateTime.toFormat('T'),
-			'ends_at_date': currentDateTime.toISODate(),
-			'ends_at_time': currentDateTime.plus({hours: 1}).toFormat('T'),
+			'starts_at':  currentDateTime.toSQL(),
+			'ends_at': currentDateTime.plus({hours: 1}).toSQL(),
 			'notes' : null
 		}
 	},
 	methods: {
-		checkForm: function(e) {
-			console.log(this.title);
-			this.sendData();
-			e.preventDefault();
+		onSubmit: function(e) {
+			this.sendData(); 
+		},
+		onClick: function(e) {
+			const currentDateTime =  DateTime.local();
+			this.starts_at = currentDateTime.toSQL();
+			console.log(this.starts_at);
 		},
 		async sendData() {
-			const res = await this.$http.post('http://api.ckcfeins.relatom.test/events', 
+			const res = await this.$http.post('http://localhost/events', 
 				{ 
 					title: this.title,
 					is_all_day: this.is_all_day,
-					starts_at: this.starts_at_date + ' ' + this.starts_at_time, 
-					ends_at: this.ends_at_date + ' ' + this.ends_at_time, 
+					starts_at: this.starts_at, 
+					ends_at: this.ends_at, 
 					notes: this.notes
 				}
 			);

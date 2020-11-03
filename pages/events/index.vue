@@ -2,10 +2,12 @@
   <main>
   	<sub-header :title="$t('events.title.index')">
   		<template v-slot:actions>
-  			<btn-link to="/events/add">
-  				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-  				<span class="ml-1">{{ $t('events.actions.add') }}</span>
-  			</btn-link>
+        <t-button variant="primary-sm" to="/events/add"><icon name="plus" size="sm" class="mr-1" /><span>{{ $t('events.actions.add') }}</span></t-button>
+        <t-button variant="secondary-sm">Publier l'agenda</t-button>
+        <t-button variant="secondary-sm">Rendre accessible l'agenda</t-button>
+        <t-button variant="secondary-sm">Tester une nouvelle fonctionnalités</t-button>
+        <t-button variant="secondary-sm">C'est le top les buttons</t-button>
+        <t-button variant="secondary-sm">Je ne comprend rien à rien</t-button>
   		</template>
   	</sub-header>	
   	<container>
@@ -21,10 +23,14 @@ import BtnLink from "~/components/ui/BtnLink"
 
 export default {
 	components: { SubHeader, BtnLink },
-  async asyncData({ params, $axios }) {
-    const events = await $axios.$get('/events')
-    return { events }
-  }
+  data() {
+    return {
+      events: []
+    }
+  },
+  async fetch() {
+    this.events = await this.$axios.$get('/events')
+  },
 }
 
 </script>

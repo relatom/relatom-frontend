@@ -16,7 +16,8 @@ module.exports = {
   },
   variants: {
     margin: ['first'],
-    backgroundColor: ['responsive', 'group-hover', 'first', 'last', 'odd', 'even', 'hover', 'focus', 'active', 'visited', 'disabled']
+    backgroundColor: ['responsive', 'group-hover', 'first', 'last', 'odd', 'even', 'hover', 'focus', 'active', 'visited', 'disabled'],
+    textColor: ['hover', 'active', 'disabled']
   },
   plugins: [
     plugin(function({ addComponents }) {

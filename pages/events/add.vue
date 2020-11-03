@@ -27,10 +27,12 @@
 	  				:label="$t('events.label.notes')"
 	  				v-model="notes" 
 	  				:placeholder="$t('events.placeholder.notes')" />
-	  			<t-button 
-	  				type="submit" 
-	  				variant="full">{{ $t('events.submit.add') }}</t-button>
+	  			<tu-submit-button 
+	  				:pending="submit.pending" 
+	  				:name="$t('events.submit.add')" 
+	  				icon="plus" />
 	  		</tu-form-with-validation>
+	  		
 	  	</container>
   	</main>
 
@@ -49,7 +51,10 @@ export default {
 			'is_all_day': false,
 			'starts_at':  currentDateTime.toSQL(),
 			'ends_at': currentDateTime.plus({hours: 1}).toSQL(),
-			'notes' : null
+			'notes' : null,
+			'submit' : {
+				'pending' : false,
+			}
 		}
 	},
 	methods: {
@@ -57,6 +62,8 @@ export default {
 			this.sendData(); 
 		},
 		async sendData() {
+			this.submit.pending = true;
+			let vm = this;
 			const res = await this.$axios.$post('/events',
 				{ 
 					title: this.title,
@@ -65,7 +72,10 @@ export default {
 					ends_at: this.ends_at, 
 					notes: this.notes
 				}
-			);
+			).then(function (response) {
+    			vm.$router.push({path: '/events'});
+    			vm.submit.pending = false;
+  			});
 		}
 	}
 

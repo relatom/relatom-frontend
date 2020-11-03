@@ -9,5 +9,46 @@
 	}	
 }
 
+.btn {
+
+	@apply inline-flex items-center m-1;
+
+	&-primary {
+		@apply bg-indigo-500 text-white;
+
+		&:hover {
+			@apply bg-indigo-600;
+		}
+
+		&:active {
+			@apply bg-indigo-700;
+		}
+
+		&:disabled {
+			@apply bg-indigo-300;
+		}
+	}
+
+	&-secondary {
+		@apply bg-white border border-gray-400 text-gray-900;
+
+		&:hover {
+			@apply text-indigo-500;
+		}
+
+		&:active {
+			@apply text-indigo-300;
+		} 
+
+		&:disabled {
+			@apply text-gray-500;
+		}
+	} 
+
+	&-sm {
+		@apply py-1 text-sm;
+	}
+}
+
 @tailwind utilities;
 

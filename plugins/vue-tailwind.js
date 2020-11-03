@@ -27,9 +27,13 @@ const settings = {
 	TButton: {
   	classes: 'bg-indigo-200',
   	variants: {
-  		'full': 'fixed bottom-0 left-0 right-0 mb-16 w-full bg-indigo-600 text-white md:static md:w-auto px-3 py-2 md:rounded-2xl'
-  	},
-  	fixedClasses: 'py-3'
+  		'full': 'fixed bottom-0 left-0 right-0 mb-16 w-full bg-indigo-600 text-white md:static md:w-auto px-3 py-2 md:rounded-2xl',
+  	  'primary': 'btn btn-primary py-2',
+      'primary-sm': 'btn btn-primary btn-sm',
+      'secondary': 'btn btn-secondary py-2',
+      'secondary-sm': 'btn btn-secondary btn-sm',
+    },
+  	fixedClasses: ' px-4 rounded-2xl'
 	},
 }
 

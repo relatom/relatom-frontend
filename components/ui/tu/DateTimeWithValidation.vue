@@ -2,7 +2,7 @@
 	<ValidationProvider ref="datetime"
 		:vid="vid" 
     :name="$attrs.name" 
-    :rules="rules + '|date'" 
+    :rules="rules" 
     :detectInput="false"
     v-slot="{ valid, errors }"> 
 		<t-input-group 
@@ -16,7 +16,6 @@
   			type="time" 
   			v-model="innerTime" v-if="isTime"/>
 		</t-input-group>
-    {{ innerValue }}
 	</ValidationProvider>
 </template>
 
@@ -52,7 +51,7 @@ export default {
   }),
   computed: {
     innerValue() {
-      return this.innerDate + ' ' + this.innerTime;
+      return this.innerDate + (this.isTime ? ' ' + this.innerTime : ' 00:00');
     }
   },
   watch: {

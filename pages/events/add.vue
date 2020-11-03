@@ -13,15 +13,15 @@
 	  				:label="$t('events.label.is_all_day')" 
 	  				v-model="is_all_day" />
 	  			<tu-date-time-with-validation
+	  				name="starts_at"
 	  				rules="required"
 	  				:label="$t('events.label.starts_at')"
 	  				v-model="starts_at"
 	  				:is-time="!is_all_day" />
 	  			<tu-date-time-with-validation
-	  				rules="required"
+	  				:rules="{ required: true, after_or_equal: is_all_day ? { date: '@starts_at' } : false, after: !is_all_day ? { date: '@starts_at' } : false }"
 	  				:label="$t('events.label.ends_at')"
 	  				v-model="ends_at"
-
 	  				:is-time="!is_all_day" />
 	  			<tu-textarea-with-validation 
 	  				:label="$t('events.label.notes')"

@@ -21,8 +21,8 @@ import BtnLink from "~/components/ui/BtnLink"
 
 export default {
 	components: { SubHeader, BtnLink },
-  async asyncData({ params, $http }) {
-    const events = await $http.$get(`http://localhost/events`)
+  async asyncData({ params, $axios }) {
+    const events = await $axios.$get('/events')
     return { events }
   }
 }

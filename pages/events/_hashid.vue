@@ -79,8 +79,8 @@ export default {
   			return 'hello';
   		}
   	},
-    async asyncData({ params, $http }) {
-	    const res = await $http.$get('http://localhost/events/' + params.hashid)
+    async asyncData({ params, $axios }) {
+	    const res = await $axios.$get('/events/' + params.hashid)
 	    const event = await res.data
 	    return { event }
 	 }

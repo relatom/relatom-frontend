@@ -30,10 +30,8 @@
 	  			<t-button 
 	  				type="submit" 
 	  				variant="full">{{ $t('events.submit.add') }}</t-button>
-	  			
 	  		</tu-form-with-validation>
 	  	</container>
-	  	<t-button v-on:click="onClick">Test</t-button>
   	</main>
 
 </template>
@@ -58,13 +56,8 @@ export default {
 		onSubmit: function(e) {
 			this.sendData(); 
 		},
-		onClick: function(e) {
-			const currentDateTime =  DateTime.local();
-			this.starts_at = currentDateTime.toSQL();
-			console.log(this.starts_at);
-		},
 		async sendData() {
-			const res = await this.$http.post('http://localhost/events', 
+			const res = await this.$axios.$post('/events',
 				{ 
 					title: this.title,
 					is_all_day: this.is_all_day,

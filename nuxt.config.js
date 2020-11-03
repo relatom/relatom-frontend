@@ -59,12 +59,17 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxt/http'
+    
   ],
+
+  axios: {
+    baseURL: 'http://localhost',
+  },
   
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'nuxt-i18n'
+    'nuxt-i18n',
+    '@nuxtjs/axios'
   ],
 
   tailwindcss: {

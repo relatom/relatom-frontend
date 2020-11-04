@@ -2,8 +2,8 @@
 	<div>
 		<sub-header :title="event.title">
 			<template v-slot:actions>
-				<t-button variant="primary" disabled>Modifier...</t-button>
-	  			<t-button variant="secondary" disabled>secondary...</t-button>
+				<t-button variant="primary-sm" :to="{path:'/events/' + $route.params.hashid + '/edit'}">Modifier</t-button>
+	  			<t-button variant="secondary-sm" disabled>secondary...</t-button>
 	  		</template>
 	  	</sub-header>
 		<container>
@@ -80,4 +80,3 @@ export default {
 	 }
 }
 </script>
-

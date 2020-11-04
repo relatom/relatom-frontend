@@ -15,6 +15,7 @@ export default {
 		"title" : {
 			"index" : "Évènements",
 			"add" : "Nouvel évènement",
+			"edit" : "Editer l'évènement",
 		},
 		"actions" : {
 			"add" : "Nouvel évènement"
@@ -31,7 +32,8 @@ export default {
 			"notes" : "Précision sur l'organisation..."
 		},
 		"submit" : {
-			"add" : "Enregistrer"
+			"add" : "Enregistrer",
+			"edit" : "Modifier",
 		}
 	}
 }

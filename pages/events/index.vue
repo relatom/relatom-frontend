@@ -3,11 +3,6 @@
   	<sub-header :title="$t('events.title.index')">
   		<template v-slot:actions>
         <t-button variant="primary-sm" to="/events/add"><icon name="plus" size="sm" class="mr-1" /><span>{{ $t('events.actions.add') }}</span></t-button>
-        <t-button variant="secondary-sm">Publier l'agenda</t-button>
-        <t-button variant="secondary-sm">Rendre accessible l'agenda</t-button>
-        <t-button variant="secondary-sm">Tester une nouvelle fonctionnalités</t-button>
-        <t-button variant="secondary-sm">C'est le top les buttons</t-button>
-        <t-button variant="secondary-sm">Je ne comprend rien à rien</t-button>
   		</template>
   	</sub-header>	
   	<container>

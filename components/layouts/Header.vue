@@ -1,8 +1,7 @@
 <template>
-  <header class="bg-white pt-6 pb-3">
+  <header class="bg-gray-800 pt-3 pb-3">
     <div class="container mx-auto flex justify-between px-4 md:px-0 h-6">
       <Back></Back>
-      <Logo></Logo>
       <Nav></Nav>
     </div>
   </header>

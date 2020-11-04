@@ -1,8 +1,10 @@
 <template>
   <div class="bg-white border-b mb-4">
-    <container class="pb-4">
-      <h1 class="font-bold text-2xl leading-none">{{ title }}</h1>
-      <div class="flex flex-wrap mt-2" v-if="hasActionsSlot">
+    <container class="py-6 flex justify-between items-center">
+      <div>
+        <h1 class="font-bold text-2xl text-gray-900 leading-tight">{{ title }}</h1>
+      </div>
+      <div class="flex flex-wrap" v-if="hasActionsSlot">
         <slot name="actions"></slot>
       </div>
     </container>

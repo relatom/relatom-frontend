@@ -3,7 +3,7 @@
 		<sub-header :title="event.title">
 			<template v-slot:actions>
 				<t-button variant="primary-sm" :to="{path:'/events/' + $route.params.hashid + '/edit'}">Modifier</t-button>
-	  			<t-button variant="secondary-sm" disabled>secondary...</t-button>
+	  			<t-button variant="delete-sm" class="ml-3">Annuler</t-button>
 	  		</template>
 	  	</sub-header>
 		<container>
@@ -44,10 +44,7 @@
 					<p class="inline-block bg-white border rounded-2xl px-3 py-1">Non on doit y être avant la marée haut dsl</p>
 				</div>
 			</div>
-			
 		</container>
-		
-		
 	</div>
 </template>
 

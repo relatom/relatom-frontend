@@ -32,6 +32,8 @@ const settings = {
       'primary-sm': 'btn btn-primary btn-sm',
       'secondary': 'btn btn-secondary py-2',
       'secondary-sm': 'btn btn-secondary btn-sm',
+      'delete': 'btn btn-delete py-2',
+      'delete-sm': 'btn btn-delete btn-sm',
     },
   	fixedClasses: ' px-4 rounded-2xl'
 	},

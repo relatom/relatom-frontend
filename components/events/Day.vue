@@ -1,6 +1,6 @@
 <template>
 	<div class="mb-4">
-		<h2 class="ml-4 mb-4 font-bold text-sm text-gray-900">{{ day | luxonLocale('date_huge') }}</h2>
+		<h2 class="ml-4 mb-4 font-bold text-sm text-gray-800">{{ day | luxonLocale('date_huge') }}</h2>
 		<events-day-item v-for="(item, index) in items" :item="item" :first="index == 0" :last="index == (items.length-1)" :key="'key-'+item.id" />
 	</div>
 </template>

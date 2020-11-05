@@ -1,6 +1,6 @@
 <template>
 	<div class="flex-1">
-		<nav class="fixed bottom-0 left-0 right-0 px-4 pb-1 pt-1 md:static md:p-0 z-20 border-t border-gray-400 md:border-none container mx-auto">
+		<nav class="bg-gray-900 fixed bottom-0 left-0 right-0 px-4 pb-2 pt-2 md:static md:p-0 z-20 container mx-auto">
 			<ul class="flex justify-between">
 				<nav-item 
 					to="/events" 

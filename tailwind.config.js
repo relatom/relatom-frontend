@@ -15,7 +15,7 @@ module.exports = {
     container: false
   },
   variants: {
-    margin: ['first', 'last'],
+    margin: ['first', 'last', 'responsive'],
     backgroundColor: ['responsive', 'group-hover', 'first', 'last', 'odd', 'even', 'hover', 'focus', 'active', 'visited', 'disabled'],
     textColor: ['hover', 'active', 'disabled']
   },

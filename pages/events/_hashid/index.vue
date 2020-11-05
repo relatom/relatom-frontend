@@ -16,7 +16,7 @@
 				</events-info-block>
 			</div>			
 			<div class="mb-4">
-				<p class="font-bold ml-2 mb-2">Allez-vous participez ?</p>
+				<p class="font-bold ml-3 mb-2">Allez-vous participez ?</p>
 				<div class="bg-white border rounded-2xl p-4">
 					<div class="flex justify-between">
 						<p>Vous (Solenn)</p>
@@ -51,8 +51,10 @@
 <script>
 
 import { DateTime } from 'luxon';
+import { mapState } from 'vuex';
 
 export default {
+
 	computed: {
   		when: function() {
   			console.log(this.event.starts_at);

@@ -1,6 +1,6 @@
 <template>
-  <header class="bg-gray-800 pt-3 pb-3">
-    <div class="container mx-auto flex justify-between px-4 md:px-0 h-6">
+  <header class="bg-gray-900 md:pt-4 md:pb-4">
+    <div class="container mx-auto flex justify-between items-center md:px-0 md:h-6">
       <Back></Back>
       <Nav></Nav>
     </div>

@@ -49,11 +49,11 @@ export default {
       path: '~/components/events',
       prefix: 'events'
     },
-    {
-      path: '~/components/icons',
-      prefix: 'icons'
-    },
   ],
+
+  router: {
+    middleware: ['auth']
+  },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
@@ -62,14 +62,11 @@ export default {
     
   ],
 
-  axios: {
-    baseURL: 'http://localhost',
-  },
-  
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     'nuxt-i18n',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   tailwindcss: {
@@ -77,11 +74,6 @@ export default {
     configPath: 'tailwind.config.js',
     exposeConfig: false,
     config: {}
-  },
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {
-    transpile: ["vee-validate/dist/rules"],
   },
 
   i18n: {
@@ -100,5 +92,47 @@ export default {
     lazy: true,
     langDir: 'assets/lang/',
     defaultLocale: 'fr',
-  }
+  },
+
+  auth: {
+    strategies: {
+        local: {
+          endpoints: {
+              login: { 
+                  url: '/login', 
+                  method: 'post',
+                  withCredentials: true, 
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                  } 
+              },
+              user: { 
+                  url: '/user', 
+                  method: 'get', 
+                  propertyName: false,
+                  withCredentials: true, 
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                  }
+              }
+          },
+          tokenRequired: false,
+          tokenType: false
+        }
+    }
+  },
+
+  axios: {
+    baseURL: 'http://localhost',
+    credentials: true
+  },
+
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
+  build: {
+    transpile: ["vee-validate/dist/rules"],
+  },
+
+  
 }

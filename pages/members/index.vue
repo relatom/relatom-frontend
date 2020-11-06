@@ -8,36 +8,52 @@
     <container>
       <div class="bg-white border rounded-2xl flex flex-col">
         <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Célestin Ballèvre</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-900 font-medium">Célestin Ballèvre</p>
+            </div>
+            <div>
+              <p class="text-xs text-white px-3 py-1 bg-blue-500 rounded-2xl">Administrateur</p>
+            </div>
           </div>
         </div>
         <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Antoine Barbier</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-900 font-medium">Antoine Barbier</p>
+            </div>
+            <div>
+              <p class="text-xs text-white px-3 py-1 bg-green-500 rounded-2xl">Organisateur</p>
+            </div>
           </div>
         </div>
         <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Jean-mickael Busnel</p>
-            <p>Eliaz</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-sm text-gray-700">Jean-mickael Busnel, Le deuxième parent si deux compte</p>
+              <p class="text-gray-900 font-medium"><span class="text-gray-400 mr-1 font-normal">—</span>Eliaz</p>      
+            </div>
+            <div>
+            </div>
           </div>
         </div>
         <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Jean philipe Choquer</p>
-            <p>Noan</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-900 font-medium">Maiann Ferron</p>      
+            </div>
+            <div>
+            </div>
           </div>
         </div>
         <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Maiann Ferron</p>
-          </div>
-        </div>
-        <div class="px-4 py-3 border-b">
-          <div> 
-            <p>Solenn Ferron</p>
-            <p>Morvan</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-900 font-medium">Solenn Ferron</p>      
+              <p class="text-gray-900 font-medium"><span class="text-gray-400 mr-1 font-normal">—</span>Morvan</p>      
+            </div>
+            <div>
+            </div>
           </div>
         </div>
       </div>

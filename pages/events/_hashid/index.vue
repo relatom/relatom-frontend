@@ -11,37 +11,58 @@
 				<events-info-block title="Quand">
 					<p>{{ when }}</p>
 				</events-info-block>
+				<events-info-block title="Où">
+					<p>Etang du boulet (Feins)</p>
+				</events-info-block>
+				<events-info-block title="Organisateur(s)">
+					<p>Sybille Blat, Célestin Ballèvre</p>
+				</events-info-block>
 				<events-info-block title="Notes">
 					<p>{{ event.notes }}</p>
+				</events-info-block>
+				<events-info-block title="Participants">
+					<p>Sybille B., Antoine B., Célestin B., Salomé G.</p>
 				</events-info-block>
 			</div>			
 			<div class="mb-4">
 				<p class="font-bold ml-3 mb-2">Allez-vous participez ?</p>
 				<div class="bg-white border rounded-2xl p-4">
-					<div class="flex justify-between">
+					<div class="flex justify-between mb-1">
 						<p>Vous (Solenn)</p>
-						<p>Oui - <span class="line-through">Non</span></p>
+						<t-toggle checked />
 					</div>
-					<div class="flex justify-between">
+					<div class="flex justify-between mb-1">
 						<p>Maiann</p>
-						<p>Oui - <span class="line-through">Non</span></p>
+						<t-toggle />
 					</div>
 					<div class="flex justify-between">
 						<p>Morvan</p>
-						<p>Oui - <span class="line-through">Non</span></p>
+						<t-toggle />
 					</div>
 				</div>
 			</div>
 			<div class="mb-4">
-				<p class="font-bold ml-2 mb-2">Discussions</p>
-
-				<div class="mb-2">
-					<p class="text-gray-700 text-sm ml-2 mb-1">Célestin Ballèvre</p>
-					<p class="inline-block bg-white border rounded-2xl px-3 py-1">L'heure du départ n'est t'il pas déplaçable ?</p>
+				<p class="font-bold ml-3 mb-2">Discussions</p>
+				<div class="mb-3 bg-white border rounded-2xl px-4 py-3">
+					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
+					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
 				</div>
-				<div class="mb-2">
-					<p class="text-gray-700 text-sm ml-2 mb-1">Antoine Barbier</p>
-					<p class="inline-block bg-white border rounded-2xl px-3 py-1">Non on doit y être avant la marée haut dsl</p>
+				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
+					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
+					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
+				</div>
+				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
+					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
+					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
+				</div>
+				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
+					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
+					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
+				</div>
+				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
+					<tu-input-with-validation 
+						class="mb-0"
+						placeholder="Add a comment" />
 				</div>
 			</div>
 		</container>
@@ -56,21 +77,22 @@ import { mapState } from 'vuex';
 export default {
 
 	computed: {
-  		when: function() {
-  			console.log(this.event.starts_at);
-  			/* const startDate = ;
-  			const endDate = ;  
-  			if(event.data.is_all_day) {
+  		'when': function() {
+	      let start = DateTime.fromSQL(this.event.starts_at);
+	      let end = DateTime.fromSQL(this.event.ends_at);
+	      const startDate = start.toISODate();
+	      const endDate = end.toISODate();
+	      
+	      if(this.event.is_all_day && startDate == endDate) {
+	        return start.toFormat('dd LLL') ;
+	      } else if(this.event.is_all_day && startDate != endDate) {
+	        return start.toFormat('dd LLL') + ' - ' + end.toFormat('dd LLL');
+	      } else if(!this.event.is_all_day && startDate != endDate) {
+	        return start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toFormat('dd LLL') + ' ' + start.toLocaleString(DateTime.TIME_SIMPLE);
+	      } 
 
-  			} else {
-  				if((date) event.data.starts_at == (date) event.data.ends_at) {
-
-  				} else {
-
-  				}
-  			} */
-  			return 'hello';
-  		}
+	      return start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toLocaleString(DateTime.TIME_SIMPLE);
+	    }
   	},
     async asyncData({ params, $axios }) {
 	    const res = await $axios.$get('/events/' + params.hashid)

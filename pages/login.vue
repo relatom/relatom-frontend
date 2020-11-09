@@ -5,10 +5,12 @@
 			<tu-form-with-validation v-on:onSubmit="login">
 				<tu-input-with-validation 
 				type="email"
-				label="Email" />
+				label="Email" 
+				v-model="form.email" />
 				<tu-input-with-validation 
 				type="password"
-				label="Mot de passe"/>
+				label="Mot de passe"
+				v-model="form.password" />
 				<tu-submit-button name="Connexion" />
 			</tu-form-with-validation>
 
@@ -32,20 +34,26 @@ export default {
 	},
 	mounted() {
       // Before loading login page, obtain csrf cookie from the server.
-      this.$axios.$get('/sanctum/csrf-cookie');
+      
   	},
   	methods: {
   		async login() {
   			this.error = {};
   			try {
+  				await this.$axios.$get('/sanctum/csrf-cookie');
+  				/* await this.$axios.$post('/login', this.form, {headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+              }, 
+              responseType: 'json'}); */
 
 	          	// Pass form data to `loginWith` function
 	          	await this.$auth.loginWith('local', { data: this.form });
 
 	          	// Redirect user after login
-	          	this.$router.push({
-	          		path: '/',
-	          	});
+	          	/* this.$router.replace({
+	          		name: 'index',
+	          	}); */ 
 	      	} catch (err) {
 	      		this.error = err;
 		        // do something with error

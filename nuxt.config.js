@@ -96,37 +96,32 @@ export default {
 
   auth: {
     strategies: {
-        local: {
-          endpoints: {
-              login: { 
-                  url: '/login', 
-                  method: 'post',
-                  withCredentials: true, 
-                  headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json'
-                  } 
-              },
-              user: { 
-                  url: '/user', 
-                  method: 'get', 
-                  propertyName: false,
-                  withCredentials: true, 
-                  headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json'
-                  }
-              }
+      local: {
+        endpoints: {
+          login: { 
+              url: '/login', 
+              method: 'post',
           },
-          tokenRequired: false,
-          tokenType: false
-        }
+          user: { 
+              url: '/user', 
+              method: 'get', 
+              propertyName: false,
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
     }
   },
 
   axios: {
     baseURL: 'http://localhost',
-    credentials: true
+    credentials: true,
+    headers: {
+      common: {
+        'Accept': 'application/json',
+      },
+    }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

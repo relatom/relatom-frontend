@@ -41,19 +41,12 @@ export default {
   			this.error = {};
   			try {
   				await this.$axios.$get('/sanctum/csrf-cookie');
-  				/* await this.$axios.$post('/login', this.form, {headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json'
-              }, 
-              responseType: 'json'}); */
-
-	          	// Pass form data to `loginWith` function
 	          	await this.$auth.loginWith('local', { data: this.form });
 
 	          	// Redirect user after login
-	          	/* this.$router.replace({
-	          		name: 'index',
-	          	}); */ 
+	          	his.$router.push({
+	          		path: '/events',
+	          	});
 	      	} catch (err) {
 	      		this.error = err;
 		        // do something with error

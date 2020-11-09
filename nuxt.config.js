@@ -95,6 +95,11 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/events'
+    },
     strategies: {
       local: {
         endpoints: {
@@ -106,12 +111,17 @@ export default {
               url: '/user', 
               method: 'get', 
               propertyName: false,
+          },
+          logout: { 
+              url: '/logout', 
+              method: 'post', 
+              propertyName: false,
           }
         },
         tokenRequired: false,
         tokenType: false
       }
-    }
+    },
   },
 
   axios: {

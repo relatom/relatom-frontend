@@ -28,7 +28,7 @@
 				<p class="font-bold ml-3 mb-2">Allez-vous participez ?</p>
 				<div class="bg-white border rounded-2xl p-4">
 					<div class="flex justify-between mb-1">
-						<p>Vous (Solenn)</p>
+						<p>Vous ({{ $auth.user.name }})</p>
 						<t-toggle checked />
 					</div>
 					<div class="flex justify-between mb-1">
@@ -42,27 +42,21 @@
 				</div>
 			</div>
 			<div class="mb-4">
-				<p class="font-bold ml-3 mb-2">Discussions</p>
+				<p class="font-bold ml-3 mb-2">1 Commentaire</p>
 				<div class="mb-3 bg-white border rounded-2xl px-4 py-3">
-					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
-					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
+					<tu-form-with-validation v-on:onSubmit="sendComment" ref="commentForm">
+						<tu-textarea-with-validation
+							rules="required" 
+							placeholder="Votre commentaire..." 
+							v-model="message" />
+						<tu-submit-button 
+							icon="paper-airplane"
+							name="Envoyer" />
+					</tu-form-with-validation>
 				</div>
-				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
-					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
-					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
-				</div>
-				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
-					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
-					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
-				</div>
-				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
-					<p class="text-gray-900 text-sm font-semibold">Célestin Ballèvre</p>
-					<p class="text-gray-700">L'heure du départ n'est t'il pas déplaçable ?</p>
-				</div>
-				<div class="mb-2 bg-white border rounded-2xl px-4 py-3">
-					<tu-input-with-validation 
-						class="mb-0"
-						placeholder="Add a comment" />
+				<div class="mb-3 bg-white border rounded-2xl px-4 py-3" v-for="comment in comments">
+					<p class="text-gray-900 text-sm font-semibold">{{ comment.created_by }}</p>
+					<p class="text-gray-700">{{ comment.message }}</p>
 				</div>
 			</div>
 		</container>
@@ -75,7 +69,11 @@ import { DateTime } from 'luxon';
 import { mapState } from 'vuex';
 
 export default {
-
+	data () {
+		return {
+			'message': null
+		}
+	},
 	computed: {
   		'when': function() {
 	      let start = DateTime.fromSQL(this.event.starts_at);
@@ -94,10 +92,32 @@ export default {
 	      return start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toLocaleString(DateTime.TIME_SIMPLE);
 	    }
   	},
+  	methods: {
+  		sendComment: function() {
+  			console.log(this.message);
+  			let vm = this;
+  			this.$axios.$post('/events/' + this.$route.params.hashid + '/comments', {
+  				message : this.message
+  			})
+  			.then(function (response) {
+  				vm.message = null;
+  				vm.$refs.commentForm.reset();
+    			vm.comments.unshift(response.data);
+  			})
+  			.catch(function (error) {
+    			console.log(error);
+  			});
+  		}
+  	},
     async asyncData({ params, $axios }) {
-	    const res = await $axios.$get('/events/' + params.hashid)
-	    const event = await res.data
-	    return { event }
-	 }
+
+	    const resEvent = await $axios.$get('/events/' + params.hashid)
+	    const resComments = await $axios.$get('/events/' + params.hashid + '/comments')
+
+	    const event = await resEvent.data
+	    const comments = await resComments.data
+
+	    return { event, comments }
+	}
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-	<ValidationObserver v-slot="{ handleSubmit }">
-		<form @submit.prevent="handleSubmit(onSubmit)">
+	<ValidationObserver v-slot="{ handleSubmit }" ref="observer"> 
+		<form @submit.prevent="handleSubmit(onSubmit)" ref="form" >
 			<slot></slot>
 		</form>
 	</ValidationObserver>
@@ -13,6 +13,9 @@ export default {
   name: 'FormWithValidation',
   components : { ValidationObserver },
   methods: {
+    reset () {
+      this.$refs.observer.reset();
+    },
     onSubmit () {
       this.$emit('onSubmit');
     }

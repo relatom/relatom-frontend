@@ -3,7 +3,7 @@ import VueLuxon from "vue-luxon";
 
 Vue.use(VueLuxon, {
     serverZone: 'utc',
-    serverFormat: 'iso',
+    serverFormat: 'sql',
     clientZone: 'locale',
     clientFormat: 'locale',
     localeLang: 'fr',

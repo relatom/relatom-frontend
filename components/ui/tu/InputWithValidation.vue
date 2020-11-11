@@ -11,7 +11,7 @@
 			<t-input 
 				v-model="innerValue"
 				:placeholder="$attrs.placeholder" 
-				:type="$attrs.type"/>
+				:type="$attrs.type"></t-input>
 		</t-input-group>
     </ValidationProvider>
 </template>

@@ -28,15 +28,11 @@
 				<p class="font-bold ml-3 mb-2">Allez-vous participez ?</p>
 				<div class="bg-white border rounded-2xl p-4">
 					<div class="flex justify-between mb-1">
-						<p>Vous ({{ $auth.user.name }})</p>
-						<t-toggle checked />
-					</div>
-					<div class="flex justify-between mb-1">
-						<p>Maiann</p>
+						<p>Vous ({{ $auth.user.firstname }})</p>
 						<t-toggle />
 					</div>
-					<div class="flex justify-between">
-						<p>Morvan</p>
+					<div class="flex justify-between mb-1" v-for="child in $auth.user.children">
+						<p>{{ child.firstname }}</p>
 						<t-toggle />
 					</div>
 				</div>
@@ -86,10 +82,10 @@ export default {
 	      } else if(this.event.is_all_day && startDate != endDate) {
 	        return start.toFormat('dd LLL') + ' - ' + end.toFormat('dd LLL');
 	      } else if(!this.event.is_all_day && startDate != endDate) {
-	        return start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toFormat('dd LLL') + ' ' + start.toLocaleString(DateTime.TIME_SIMPLE);
+	        return start.toFormat('dd LLL') + ' ' + start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toFormat('dd LLL') + ' ' + start.toLocaleString(DateTime.TIME_SIMPLE);
 	      } 
 
-	      return start.toLocaleString(DateTime.TIME_SIMPLE) + ' - ' + end.toLocaleString(DateTime.TIME_SIMPLE);
+	      return start.toLocaleString(DateTime.DATE_HUGE) + ' de ' + start.toLocaleString(DateTime.TIME_SIMPLE) + ' à ' + end.toLocaleString(DateTime.TIME_SIMPLE);
 	    }
   	},
   	methods: {

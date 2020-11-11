@@ -1,7 +1,8 @@
 <template>
-	<div class="m-auto w-1/6">
+	<div class="m-auto px-4 md:p-0 w-full md:w-1/4">
+		<h1 class="text-2xl text-gray-900 font-bold mb-6 text-center">Se connecter</h1>
 		<div class="bg-white border rounded-2xl p-6">
-			<h1 class="text-xl text-gray-900 mb-4">Se connecter</h1>
+			
 			<tu-form-with-validation v-on:onSubmit="login">
 				<tu-input-with-validation 
 				type="email"
@@ -11,7 +12,7 @@
 				type="password"
 				label="Mot de passe"
 				v-model="form.password" />
-				<tu-submit-button name="Connexion" />
+				<tu-submit-button name="Connexion" icon="lock-closed" :pending="pending"/>
 			</tu-form-with-validation>
 
 		</div>
@@ -29,28 +30,24 @@ export default {
 				email: null,
 				password: null
 			},
+			pending: false,
 			error: {}
 		}
 	},
-	mounted() {
-      // Before loading login page, obtain csrf cookie from the server.
-      
-  	},
   	methods: {
-  		async login() {
+  		login() {
+  			this.pending = true;
   			this.error = {};
-  			try {
-  				await this.$axios.$get('/sanctum/csrf-cookie');
-	          	await this.$auth.loginWith('local', { data: this.form });
+  			this.$axios.get('/sanctum/csrf-cookie').then(response => {
+		    	this.$auth.loginWith('local', { data: this.form }).then(response => {
+		    		this.$router.push({path: '/events'});
+		    	}).catch(error => {
+		    		this.pending = false;
+	    			console.log(error);
+	  			});
+		    });
 
-	          	// Redirect user after login
-	          	his.$router.push({
-	          		path: '/events',
-	          	});
-	      	} catch (err) {
-	      		this.error = err;
-		        // do something with error
-		    }
+		    // this.error = err;
 		},
 	}
 }

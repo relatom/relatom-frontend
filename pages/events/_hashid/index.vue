@@ -21,24 +21,21 @@
 					<p>{{ event.notes }}</p>
 				</events-info-block>
 				<events-info-block title="Participants">
-					<p>Sybille B., Antoine B., Célestin B., Salomé G.</p>
+					<p><span>Sybille B., Célestin B., </span><span v-for="participant, index in participants">{{participant.fullname_short}}, </span></p>
 				</events-info-block>
 			</div>			
 			<div class="mb-4">
 				<p class="font-bold ml-3 mb-2">Allez-vous participez ?</p>
 				<div class="bg-white border rounded-2xl p-4">
-					<div class="flex justify-between mb-1">
-						<p>Vous ({{ $auth.user.firstname }})</p>
-						<t-toggle />
-					</div>
-					<div class="flex justify-between mb-1" v-for="child in $auth.user.children">
-						<p>{{ child.firstname }}</p>
-						<t-toggle />
+					<div class="flex justify-between mb-1" v-for="participation in participations">
+						<p v-if="participation.id == $auth.user.id">Vous ({{ participation.firstname }})</p>
+						<p v-else>{{ participation.firstname }}</p>
+						<t-toggle v-model="participation.is_participating" v-on:change="sendParticipation(participation)"/>
 					</div>
 				</div>
 			</div>
 			<div class="mb-4">
-				<p class="font-bold ml-3 mb-2">1 Commentaire</p>
+				<p class="font-bold ml-3 mb-2">Commentaires</p>
 				<div class="mb-3 bg-white border rounded-2xl px-4 py-3">
 					<tu-form-with-validation v-on:onSubmit="sendComment" ref="commentForm">
 						<tu-textarea-with-validation
@@ -103,17 +100,28 @@ export default {
   			.catch(function (error) {
     			console.log(error);
   			});
+  		},
+  		sendParticipation: function(participation) {
+  			this.$axios.$post('/events/' + this.$route.params.hashid + '/participations', {
+  				id : participation.id
+  			}).then(response => {
+  				this.participants = response.data;
+  			});
   		}
   	},
     async asyncData({ params, $axios }) {
 
 	    const resEvent = await $axios.$get('/events/' + params.hashid)
 	    const resComments = await $axios.$get('/events/' + params.hashid + '/comments')
+	    const resParticipants = await $axios.$get('/events/' + params.hashid + '/participants');
+	    const resParticipations = await $axios.$get('/events/' + params.hashid + '/participations');
 
 	    const event = await resEvent.data
 	    const comments = await resComments.data
+	    const participants = await resParticipants.data
+	    const participations = await resParticipations.data
 
-	    return { event, comments }
+	    return { event, comments, participants, participations }
 	}
 }
 </script>
